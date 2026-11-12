@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Recipe Finder — Clamor</title>
+<meta name="description" content="Search recipes by name, ingredient or cuisine, save favourites, and cook with what you have. Free TheMealDB data, no API key.">
+<link rel="stylesheet" href="styles.css">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+</head>
+<body>
+<header class="topbar">
+  <div class="brand"><span class="logo" aria-hidden="true">🍳</span><div><h1>Recipe Finder</h1><p>Search · Cook · Save favourites</p></div></div>
+  <nav class="tabs" aria-label="Views">
+    <button id="tabSearch" class="active" type="button">🔍 Search</button>
+    <button id="tabFavs" type="button">❤️ Favourites (<span id="favCount">0</span>)</button>
+    <button id="tabPantry" type="button">🥕 Cook with what you have</button>
+  </nav>
+</header>
+<main>
+  <section id="searchView">
+    <form id="searchForm" class="searchbar" role="search">
+      <input id="query" type="text" placeholder="Search a dish or ingredient — e.g. chicken, pasta, paneer…" aria-label="Search recipes">
+      <select id="searchMode" aria-label="Search by"><option value="name">By dish name</option><option value="ingredient">By ingredient</option></select>
+      <button type="submit">Search</button>
+      <button id="surpriseBtn" type="button" class="ghost">🎲 Surprise me</button>
+    </form>
+    <div class="chips" id="cuisineChips" aria-label="Browse by cuisine"></div>
+    <p id="status" class="status" role="status">Try "chicken" or pick a cuisine below.</p>
+    <div id="results" class="grid"></div>
+  </section>
+  <section id="favsView" hidden>
+    <h2>Your favourites</h2><p class="muted">Saved in this browser (localStorage). Click a card to see the full recipe.</p>
+    <div id="favGrid" class="grid"></div>
+  </section>
+  <section id="pantryView" hidden>
+    <h2>Cook with what you have</h2>
+    <p class="muted">Type up to 3 ingredients you already own. Recipes are ranked by how many of them they use — the best match first.</p>
+    <form id="pantryForm" class="searchbar">
+      <input id="ing1" type="text" placeholder="Ingredient 1 — e.g. chicken" aria-label="Ingredient 1">
+      <input id="ing2" type="text" placeholder="Ingredient 2 — e.g. garlic" aria-label="Ingredient 2">
+      <input id="ing3" type="text" placeholder="Ingredient 3 — optional" aria-label="Ingredient 3">
+      <button type="submit">Find matches</button>
+    </form>
+    <p id="pantryStatus" class="status" role="status"></p>
+    <div id="pantryResults" class="grid"></div>
+  </section>
+</main>
+<div id="modal" class="modal" hidden role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <div class="modal-card">
+    <button id="modalClose" class="close" type="button" aria-label="Close">✕</button>
+    <img id="modalImg" src="" alt="">
+    <div class="modal-body">
+      <h2 id="modalTitle"></h2>
+      <p id="modalMeta" class="muted"></p>
+      <button id="modalFav" type="button">🤍 Save to favourites</button>
+      <h3>Ingredients</h3><ul id="modalIngredients"></ul>
+      <h3>Method</h3><ol id="modalSteps"></ol>
+      <p id="modalSource" class="muted"></p>
+    </div>
+  </div>
+</div>
+<footer><p>Data: TheMealDB (free, no key) · Built by Clamor · Sample recipes are used automatically when the network is unavailable.</p></footer>
+<script src="app.js"></script>
+</body>
+</html>
